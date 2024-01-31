@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
 import { DataViewModule } from 'primeng/dataview';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 
@@ -24,7 +25,8 @@ import { DataViewModule } from 'primeng/dataview';
     TagModule,
     RatingModule,
     ReactiveFormsModule,
-    DataViewModule
+    DataViewModule,
+    DropdownModule
   ],
   exports: [
     ProductsAdminComponent,
