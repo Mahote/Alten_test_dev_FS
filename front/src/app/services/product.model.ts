@@ -1,4 +1,4 @@
-class Product {
+export interface Product {
     id: number;
     code: string;
     name: string;
@@ -10,3 +10,7 @@ class Product {
     image?: string;
     rating?: number;
   }
+
+export interface Products {
+  products: Array<Product>
+}

@@ -32,6 +32,7 @@ import { RatingModule } from "primeng/rating";
 import { SidebarModule } from 'primeng/sidebar';
 import { StepsModule } from "primeng/steps";
 import { TableModule } from "primeng/table";
+import { TagModule } from "primeng/tag";
 import { TabMenuModule } from "primeng/tabmenu";
 import { TabViewModule } from "primeng/tabview";
 import { ToastModule } from 'primeng/toast';
@@ -41,6 +42,7 @@ import { TooltipModule } from "primeng/tooltip";
 
 @NgModule({
   imports: [
+    TagModule,
     CommonModule,
     TableModule,
     PaginatorModule,
@@ -80,6 +82,7 @@ import { TooltipModule } from "primeng/tooltip";
     ProgressSpinnerModule
   ],
   exports: [
+    TagModule,
     TableModule,
     PaginatorModule,
     ButtonModule,
