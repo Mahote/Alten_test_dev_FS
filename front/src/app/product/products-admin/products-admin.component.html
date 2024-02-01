@@ -1,1 +1,28 @@
-<p>products-admin works!</p>
+<div class="button-container">
+    <button pButton icon="pi pi-plus" class="add-button"></button>
+    <button pButton icon="pi pi-trash" class="delete-button"></button>
+</div>
+
+<p-table [value]="products" selectionMode="multiple" [(selection)]="selectedProducts">
+    <ng-template pTemplate="header">
+        <tr>
+            <th></th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>
+                <input type="checkbox" />
+            </td>
+            <td>{{product.code}}</td>
+            <td>{{product.name}}</td>
+            <td>
+                <button pButton icon="pi pi-pencil" class="edit-button"></button>
+                <button pButton icon="pi pi-trash" class="delete-button"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

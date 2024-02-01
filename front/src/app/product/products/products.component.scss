@@ -1,0 +1,25 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+.product-list-item {
+    display: flex;
+    justify-content: space-between;
+}
+.product-list-detail {
+    font-size: x-large;
+  font-weight: bold;
+}
+
+.product-list-action {
+    display: flex;
+    font-weight: bold;
+  justify-content: space-between;
+  width: 300px;
+  align-items: center;
+}
+
+input {
+    height: 44px;
+    margin-left: 10px;
+}

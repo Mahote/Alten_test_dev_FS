@@ -9,7 +9,11 @@ import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
 import { DataViewModule } from 'primeng/dataview';
 import { DropdownModule } from 'primeng/dropdown';
-
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
 
 
 
@@ -26,7 +30,12 @@ import { DropdownModule } from 'primeng/dropdown';
     RatingModule,
     ReactiveFormsModule,
     DataViewModule,
-    DropdownModule
+    DropdownModule,
+    ButtonModule,
+    ToastModule,
+    ToolbarModule,
+    TableModule,
+    DialogModule
   ],
   exports: [
     ProductsAdminComponent,
