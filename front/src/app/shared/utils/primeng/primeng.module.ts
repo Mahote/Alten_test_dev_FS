@@ -12,6 +12,7 @@ import { ChipModule } from "primeng/chip";
 import { ChipsModule } from 'primeng/chips';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 import { DataViewModule } from "primeng/dataview";
 import { DialogModule } from "primeng/dialog";
 import { DialogService, DynamicDialogModule } from "primeng/dynamicdialog";
@@ -122,7 +123,8 @@ import { TooltipModule } from "primeng/tooltip";
   ],
   providers: [
     DialogService,
-    MessageService
+    MessageService,
+    ConfirmationService
   ],
 })
 export class PrimeNGModule { }

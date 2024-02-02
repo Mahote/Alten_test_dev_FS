@@ -1,13 +1,13 @@
 <div class="products">
     <p-dataView #dv [value]="filteredProducts" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]" filterBy="name"
-        [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+        [sortField]="sortField" [sortOrder]="sortOrder" layout="list">
         <ng-template pTemplate="header">
             <div class="header">
                     <div class="filtering">
-                        <p-dropdown [options]="sortOptions" placeholder="Sort By Price" (onChange)="onSortChange($event)" styleClass="mb-2 md:mb-0"></p-dropdown>
-                        <span class="p-input-icon-left mb-2 md:mb-0" styleClass="mb-2 md:mb-0">  
+                        <p-dropdown [options]="sortOptions" placeholder="Sort By Price" (onChange)="onSortChange($event)"></p-dropdown>
+                        <span class="p-input-icon-right">
                             <i class="pi pi-search"></i>
-                            <input type="search" pInputText placeholder="Search by Name" (input)="filterProducts()">
+                            <input type="text" pInputText [(ngModel)]="searchTerm" placeholder="Search" (input)="filterProducts()">         
                         </span>
                     </div>
                     <div class="layout">
@@ -22,7 +22,8 @@
                         <div class="product-name">{{product.name}}</div>
                         <div class="product-description">{{product.description}}</div>
                         <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
-                        <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{product.category}}</span>
+                        <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" alt="{{ product.name }}">
+                        <span class="product-category">{{product.category}}</span>
                     </div>
                     <div class="product-list-action">
                         <span class="product-price">${{product.price}}</span>
@@ -33,11 +34,11 @@
             </div>
         </ng-template>
         <ng-template let-product pTemplate="gridItem">
-            <div class="listGrid">
-                <div class="product-grid-item card">
+            <div class="col-12 md:col-3 card">
+                <div class="product-grid-item">
                     <div class="product-grid-item-top">
                         <div>
-                            <i class="pi pi-tag product-category-icon"></i>
+                            <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" alt="{{ product.name }}">
                             <span class="product-category">{{product.category}}</span>
                         </div>
                         <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>

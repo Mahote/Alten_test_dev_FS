@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'app/services/product.model';
 import { ProductsService } from 'app/services/products.service';
-import { SelectItem } from 'primeng/api';
+import { ConfirmationService, SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'app-products',
@@ -10,7 +10,7 @@ import { SelectItem } from 'primeng/api';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor(private productsService: ProductsService, ) { }
+  constructor(private productsService: ProductsService, confirmationService: ConfirmationService) { }
 
   sortOptions!: SelectItem[]
 
