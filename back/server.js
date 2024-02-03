@@ -1,6 +1,9 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const mysql = require('mysql2');
+const cors = require('cors')
+
+
 
 // Charger les variables d'environnement
 dotenv.config();
@@ -27,6 +30,8 @@ module.exports = connection;
 
 // Créer une instance de l'application Express
 const app = express();
+
+app.use(cors())
 
 // Middleware pour analyser les requêtes JSON
 app.use(express.json());

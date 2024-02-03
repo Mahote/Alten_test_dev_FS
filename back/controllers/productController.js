@@ -1,4 +1,4 @@
-const Product = require('../models/productModel');
+const Product = require('../services/productService');
 
 // Récupérer tous les produits
 function getAllProducts(req, res) {
@@ -48,9 +48,22 @@ function deleteProduct(req, res) {
   });
 }
 
+function deleteProducts(req, res) {
+  const productIds = req.body.productIds;
+  Product.deleteProducts(productIds, (err, result) => {
+    if (err) {
+      res.status(500).json({ error: 'Erreur serveur' });
+      return;
+    }
+    res.json({ message: 'Produits supprimés avec succès' });
+  });
+}
+
+
 module.exports = {
   getAllProducts,
   createProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  deleteProducts
 };

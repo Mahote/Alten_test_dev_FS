@@ -27,12 +27,10 @@ export class ProductsComponent implements OnInit {
   searchTerm: string = '';
 
   ngOnInit(): void {
-
-
-    this.productsService.getProducts().subscribe((products: Product[]) => {
+    this.productsService.products$.subscribe(products => {
       this.products = products;
       this.filteredProducts = products;
-    })
+    });
 
     this.sortOptions = [
       { label: 'Sort by name', value:'name'},

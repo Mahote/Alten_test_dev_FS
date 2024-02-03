@@ -30,9 +30,9 @@ export class ProductsAdminComponent implements OnInit {
     constructor(private productsService: ProductsService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
     ngOnInit() {
-      this.productsService.getProducts().subscribe((products: Product[]) => {
-          this.products = products;
-      })
+      this.productsService.products$.subscribe(products => {
+        this.products = products.sort();
+      });
 
         this.statuses = [
             {label: 'INSTOCK', value: 'instock'},
@@ -60,9 +60,16 @@ export class ProductsAdminComponent implements OnInit {
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.products = this.products.filter(val => !this.selectedProducts.includes(val));
-                this.selectedProducts = null;
-                this.messageService.add({severity:'success', summary: 'Successful', detail: 'Products Deleted', life: 3000});
+
+              let selectedProductIds = this.selectedProducts.map(product => product.id);
+
+              this.productsService.deleteSelectedProducts(selectedProductIds).subscribe(() => {
+                this.selectedProducts.forEach(product => {
+                  this.products = this.products.filter(p => p.id !== product.id);
+                });
+                this.selectedProducts = [];
+                this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000});
+              });
             }
         });
     }
@@ -78,9 +85,10 @@ export class ProductsAdminComponent implements OnInit {
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.products = this.products.filter(val => val.id !== product.id);
-                this.product = {} as Product;
-                this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Deleted', life: 3000});
+              this.productsService.deleteProduct(product.id).subscribe(() => {
+                this.products = this.products.filter(p => p.id !== product.id);
+                this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000});
+              });
             }
         });
     }
@@ -95,14 +103,24 @@ export class ProductsAdminComponent implements OnInit {
 
         if (this.product.name.trim()) {
             if (this.product.id) {
-                this.products[this.findIndexById(this.product.id)] = this.product;
-                this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Updated', life: 3000});
+              let index = this.products.findIndex(p => p.id === this.product.id);
+              if (index !== -1) {
+                this.productsService.updateProduct(this.product).subscribe(() => {
+                  this.products[index] = this.product;
+                  this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000});
+                });
+              }
             }
             else {
-                this.product.id = this.createId();
-                this.product.image = 'product-placeholder.svg';
-                this.products.push(this.product);
-                this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Created', life: 3000});
+              console.log("i am here")
+              this.productsService.createProduct(this.product).subscribe((productId: string) => {
+                this.product.id = productId;
+
+                this.product.image = this.generateProductImageSource(this.product.name);
+                this.products.push({...this.product});
+                this.products.sort()
+                this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000});
+              });
             }
 
             this.products = [...this.products];
@@ -111,24 +129,8 @@ export class ProductsAdminComponent implements OnInit {
         }
     }
 
-    findIndexById(id: string): number {
-        let index = -1;
-        for (let i = 0; i < this.products.length; i++) {
-            if (this.products[i].id === id) {
-                index = i;
-                break;
-            }
-        }
-
-        return index;
-    }
-
-    createId(): string {
-        let id = '';
-        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for ( var i = 0; i < 5; i++ ) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return id;
-    }
+    generateProductImageSource(name: string): string {
+      // Remplacer les espaces par des tirets et mettre tout en minuscules
+      return name.toLowerCase().replace(/\s+/g, '-');
+  }
 }
