@@ -31,6 +31,8 @@ Un système de pagination doit être mis en place pour pouvoir afficher les prod
 
 # Back-end (optionnel)
 
+### VOUS DEVEZ CRÉER LA BASE DE DONNÉES EN LOCAL SUR LE PORT 3000, CRÉER UN .env DANS LE DOSSIER BACK ET CHANGER db.py POUR LA POPULATE 
+
 Si vous avez le temps vous pouvez développer un back-end permettant la gestion de produits définis plus bas.
 Vous pouvez utiliser la technologie de votre choix parmis la liste suivante :
 
