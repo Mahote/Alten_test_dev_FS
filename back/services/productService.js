@@ -10,6 +10,17 @@ function getAllProducts(callback) {
     callback(null, results);
   });
 }
+// Récupérer un produit
+function getProduct(productId, callback) {
+  connection.query('SELECT * FROM products where id = ?', productId, (error, results) => {
+    if (error) {
+
+      callback(error, null);
+      return;
+    }
+    callback(null, results);
+  });
+}
 
 // Créer un nouveau produit
 function createProduct(newProduct, callback) {
@@ -57,6 +68,7 @@ function deleteProducts(productIds, callback) {
 
 module.exports = {
   getAllProducts,
+  getProduct,
   createProduct,
   updateProduct,
   deleteProduct,

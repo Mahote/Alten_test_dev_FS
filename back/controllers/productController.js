@@ -11,6 +11,18 @@ function getAllProducts(req, res) {
   });
 }
 
+// Récupérer un Produit
+function getProduct(req, res) {
+  const productId = req.params.id
+  Product.getProduct(productId, (err, product) => {
+    if (err) {
+      res.status(500).json({ error: 'Erreur serveur lors de la récupération' });
+      return;
+    }
+    res.json(product);
+  });
+}
+
 // Créer un nouveau produit
 function createProduct(req, res) {
   const newProduct = req.body;
@@ -48,6 +60,7 @@ function deleteProduct(req, res) {
   });
 }
 
+// Supprimer plusieurs produit
 function deleteProducts(req, res) {
   const productIds = req.body.productIds;
   Product.deleteProducts(productIds, (err, result) => {
@@ -62,6 +75,7 @@ function deleteProducts(req, res) {
 
 module.exports = {
   getAllProducts,
+  getProduct,
   createProduct,
   updateProduct,
   deleteProduct,
