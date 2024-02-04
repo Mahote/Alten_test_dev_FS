@@ -12,7 +12,7 @@ export const SIDENAV_ITEMS: SidenavItem[] = [
 
   },
   {
-    id: 'admin',
+    id: 'admin/products',
     icon: "users",  
     labels: {
       en: "admin",
