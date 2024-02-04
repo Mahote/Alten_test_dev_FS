@@ -19,6 +19,7 @@ export class ProductsService {
 
   loadProducts() {
     this.http.get<Product[]>(this.url).subscribe(products => {
+      console.log(products)
       products.sort((a, b) => a.name.localeCompare(b.name));
       this.productsSubject.next(products);
     });

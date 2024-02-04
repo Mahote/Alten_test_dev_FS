@@ -18,7 +18,7 @@ export const SIDENAV_ITEMS: SidenavItem[] = [
       en: "admin",
       fr: "admin"
     },
-    link: 'admin'
+    link: 'admin/products'
 
   }
 

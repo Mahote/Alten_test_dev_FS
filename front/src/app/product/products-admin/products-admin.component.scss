@@ -1,6 +1,13 @@
 @import "../../../styles.scss";
 
 :host ::ng-deep {
+
+    .p-toolbar {
+        margin: 10px;
+    }
+    .p-rating {
+        display: flex;
+    }
     .p-paginator {
         .p-paginator-current {
             margin-left: auto;

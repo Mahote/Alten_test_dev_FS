@@ -25,13 +25,18 @@ export class ProductsAdminComponent implements OnInit {
 
     statuses: any[];
 
-    categories: any []
+    categories: any [];
+
+    filteredProducts: Product[] = [];
+
+    searchTerm: string = '';
 
     constructor(private productsService: ProductsService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
     ngOnInit() {
       this.productsService.products$.subscribe(products => {
         this.products = products.sort();
+        this.filteredProducts = products.sort();
       });
 
         this.statuses = [
@@ -46,6 +51,16 @@ export class ProductsAdminComponent implements OnInit {
           {label: 'ELECTRONIC', value: 'electronic'}
       ];
     
+    }
+
+    filterProducts(): void {
+      if (!this.searchTerm) {
+        this.filteredProducts = this.products;
+      } else {
+        this.filteredProducts = this.products.filter(product =>
+          product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+        );
+      }
     }
 
     openNew() {
