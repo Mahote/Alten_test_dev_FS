@@ -4,10 +4,10 @@
         <ng-template pTemplate="header">
             <div class="header">
                     <div class="filtering">
-                        <p-dropdown [options]="sortOptions" placeholder="Sort By Price" (onChange)="onSortChange($event)"></p-dropdown>
+                        <p-dropdown [options]="sortOptions" placeholder="Sort By Name" (onChange)="onSortChange($event)"></p-dropdown>
                         <span class="p-input-icon-right">
                             <i class="pi pi-search"></i>
-                            <input type="text" pInputText [(ngModel)]="searchTerm" placeholder="Search" (input)="filterProducts()">         
+                            <input type="text" pInputText  placeholder="Search" [(ngModel)]="searchTerm" (input)="filterProducts()">         
                         </span>
                     </div>
                     <div class="layout">
